@@ -58,8 +58,8 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 SECRET_KEY = '\2\1thisismyscretkey\1\2\e\y\y\h'  # noqa
 
 # The SQLAlchemy connection string.
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(DATA_DIR, 'superset.db')
-# SQLALCHEMY_DATABASE_URI = 'mysql://myapp@localhost/myapp'
+# SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(DATA_DIR, 'superset.db')
+SQLALCHEMY_DATABASE_URI = 'mysql://root@localhost:3306/dashboard'
 # SQLALCHEMY_DATABASE_URI = 'postgresql://root:password@localhost/myapp'
 
 # In order to hook up a custom password store for all SQLACHEMY connections
@@ -282,7 +282,8 @@ SQL_CELERY_RESULTS_DB_FILE_PATH = os.path.join(DATA_DIR, 'celery_results.sqlite'
 # static http headers to be served by your Superset server.
 # This header prevents iFrames from other domains and
 # "clickjacking" as a result
-HTTP_HEADERS = {'X-Frame-Options': 'SAMEORIGIN'}
+# HTTP_HEADERS = {'X-Frame-Options': 'SAMEORIGIN'}
+HTTP_HEADERS = {}
 # If you need to allow iframes from other domains (and are
 # aware of the risks), you can disable this header:
 # HTTP_HEADERS = {}
@@ -441,6 +442,7 @@ try:
     else:
         from superset_config import *  # noqa
         import superset_config
+
         print('Loaded your LOCAL configuration at [{}]'.format(
             superset_config.__file__))
 except ImportError:

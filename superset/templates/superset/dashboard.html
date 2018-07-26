@@ -1,5 +1,11 @@
 {% extends "superset/basic.html" %}
 
 {% block body %}
-  <div id="app" data-bootstrap="{{ bootstrap_data }}" />
+    <div style="min-height:{{ min_height * 8 + 48 }}px" id="app" data-bootstrap="{{ bootstrap_data }}"></div>
+{% endblock %}
+
+{% block extend_js %}
+    <script>
+        window.top.postMessage(document.body.scrollHeight, "*");
+    </script>
 {% endblock %}
