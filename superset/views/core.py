@@ -2193,15 +2193,19 @@ class Superset(BaseSupersetView):
 
         dashboard_data = dash.data
 
+        min_height = 0
         position_json = dashboard_data.get("position_json")
-        rows = position_json.get("DASHBOARD_GRID_ID").get("children")
-        min_height = -2
-        for row_id in rows:
-            row = position_json.get(row_id)
-            children = row.get("children")
-            app.logger.info(children)
-            max_row_height = max([int(position_json.get(child).get("meta").get("height")) for child in children]) + 2
-            min_height += max_row_height
+        if position_json:
+            rows = position_json.get("DASHBOARD_GRID_ID").get("children")
+            for row_id in rows:
+                row = position_json.get(row_id)
+                children = row.get("children")
+                app.logger.info(children)
+                max_row_height = max(
+                    [int(position_json.get(child).get("meta").get("height")) for child in children]
+                ) + 2
+                min_height += max_row_height
+            min_height = min_height - 2
 
         dashboard_data.update({
             'standalone_mode': standalone_mode,
