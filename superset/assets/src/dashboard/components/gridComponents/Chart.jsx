@@ -107,6 +107,9 @@ class Chart extends React.Component {
     }
 
     getHeaderHeight() {
+        if (this.props.iframeMode) {
+            return 0
+        }
         return (this.headerRef && this.headerRef.offsetHeight) || 30;
     }
 
